@@ -7,6 +7,6 @@ export interface IPackageDetails extends Document {
     creationDate: Date
 };
 
-// export interface IPackageHistory extends IPackageDetails {
-//     _id : ObjectId
-// }
+export interface PackageDetailsReq extends  IPackageDetails {
+    status: 'llegada'| 'transito' | 'enviado'
+};

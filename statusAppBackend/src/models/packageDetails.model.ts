@@ -15,16 +15,18 @@ const packageHistorySchema = new Schema({
     }
 });
 
+const labelSchema = new Schema({
+    type: String,
+    enum: ['quimico', 'flamable', 'delicado'],
+    require: true
+});
+
 const packageDetailsSchema = new Schema({
     package: {
         type: ObjectId,
         require: true
     },
-    label: {
-        type: String,
-        enum: ['quimico', 'flamable', 'delicado'],
-        require: true
-    },
+    label: [labelSchema],
     packageHistory: [packageHistorySchema],
     creationDate: {
         type: Date,

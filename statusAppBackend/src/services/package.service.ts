@@ -1,9 +1,9 @@
-import { Model } from 'mongoose';
 import { PackageModel } from '../models/package.model'
 import { PackageDetailModel } from '../models/packageDetails.model';
 import { IPackage } from '../types/package.type'
+import { PackageDetailsReq } from '../types/packageDetails.type'
 
-export const createPackage = async (priority: 'bajo' | 'medio' | 'alto', packageDetails: any): Promise<IPackage> => {
+export const createPackage = async (priority: 'bajo' | 'medio' | 'alto', packageDetails: PackageDetailsReq): Promise<IPackage> => {
 
     const packageDocument = new PackageModel({
         status: 'llegada',
@@ -29,10 +29,7 @@ export const createPackage = async (priority: 'bajo' | 'medio' | 'alto', package
 
 export const getPackages = async () => {
     
-    var packageLenght = ((PackageModel.length) - 1);
+    return await PackageModel.find({});
 
-    var getPackage: typeof PackageModel[] = new Array(packageLenght);
-
-
-    return await getPackage;
 };
+

@@ -1,23 +1,34 @@
 import { Router } from 'express';
-import { PackageModel } from '../models/package.model';
 import { createPackage } from '../services/package.service';
 import { getPackages } from '../services/package.service';
+import { PACKAGES_ENDPOINT } from '../const/endpoint';
 
 export const router: Router = Router();
 
-router.post("/packages", async (req, res) => {
+router.post(PACKAGES_ENDPOINT, async (req, res) => {
 
-    const { priority, packageDetails } = req.body;
+    try {
+        const { priority, packageDetails } = req.body;
 
-    const packageObject = await createPackage(priority, packageDetails);
+        const packageObject = await createPackage(priority, packageDetails);
 
-    res.status(200).json(packageObject)
+        return res.status(200).json(packageObject);
+    } catch (error) {
+        return res.status(500).json({ "messages": error });
+    }
+
 });
 
-router.get("/getPackages", async (req, res) => {
+router.get(PACKAGES_ENDPOINT, async (req, res) => {
 
-    // console.log(getPackages)
-    res.send( ( await (await getPackages()) ) );
+    try {
+        const packages = await getPackages();
+
+        return res.status(200).json(packages);
+    } catch (error) {
+        return res.status(200).json({ "message": error });
+    }
+
 
 });
 
