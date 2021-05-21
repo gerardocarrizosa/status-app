@@ -43,7 +43,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   return res.status(500).json({
     errorName: err.name,
     message: err.message,
-    stack: err.stack || 'no stack defined'
+    stack: err.stack || 'no stack defined!'
   });
 });
 
